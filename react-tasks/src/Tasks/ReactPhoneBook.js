@@ -48,11 +48,12 @@ const style = {
 };
 
 function PhoneBookForm(props) {
+
     const initContact = {
         id: null,
-        userFirstname: "Coder",
-        userLastname: "Byte",
-        userPhone: "8885559999",
+        userFirstname: "",
+        userLastname: "",
+        userPhone: "",
     };
 
     const [userState, setUserState] = useState(initContact);
@@ -65,6 +66,7 @@ function PhoneBookForm(props) {
     };
 
     const handleSubmit = (e) => {
+
         e.preventDefault();
         if (!userState.userFirstname || !userState.userLastname || !userState.userPhone) return;
         props.addUser(userState);
@@ -114,6 +116,7 @@ function PhoneBookForm(props) {
 }
 
 function InformationTable(props) {
+    debugger
     const sortedContacts = props.users.sort((a, b) => a.userLastname.localeCompare(b.userLastname));
 
     const display =
