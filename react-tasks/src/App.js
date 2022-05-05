@@ -1,9 +1,10 @@
 import './App.css';
+import Application from './Tasks/ReactPhoneBook';
 
 function App() {
   return (
     <div className="App">
-      Test
+      <Application />
     </div>
   );
 }
