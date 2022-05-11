@@ -15,13 +15,27 @@
 // console.log(SimpleAdding(10))
 
 //Solution 2
-function SimpleAdding(num) {
-    num = num * (num + 1) / 2;
-    // code goes here  
-    return num;
+// function SimpleAdding(num) {
+//     num = num * (num + 1) / 2;
+//     // code goes here  
+//     return num;
 
+// }
+
+// // keep this function call here 
+// // to see how to enter arguments in JavaScript scroll down
+// console.log(SimpleAdding(10))
+
+//Solution 3
+
+function SimpleAdding(num) {
+
+    if (num === 0) {
+        return num;
+    }
+
+    return num + SimpleAdding(num - 1);
 }
 
 // keep this function call here 
-// to see how to enter arguments in JavaScript scroll down
 console.log(SimpleAdding(10))
