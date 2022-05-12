@@ -15,11 +15,30 @@
 
 // Solution 2
 
+// function CheckNums(num1, num2) {
+
+//     // code goes here  
+//     return num1 == num2 ? "-1" : num2 > num1 ? " true" : "false";
+
+// }
+
+// console.log(CheckNums(3, 3));
+
+// Solution 3
+
 function CheckNums(num1, num2) {
 
-    // code goes here  
-    return num1 == num2 ? "-1" : num2 > num1 ? " true" : "false";
+    if (num1 === num2) {
+        return -1;
+    }
+    if (num1 > num2) {
+        return false;
+    }
+    else {
+        return true;
+    }
 
 }
+
 
 console.log(CheckNums(3, 3));
