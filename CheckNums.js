@@ -5,10 +5,21 @@
 
 //Solution 1
 
+// function CheckNums(num1, num2) {
+
+//     // If the numbers are equal, return -1. Otherwise, return Boolean for whether num2 is greater than num1.
+//     return (num1 == num2) ? -1 : num2 > num1;
+// }
+
+// console.log(CheckNums(5, 3));
+
+// Solution 2
+
 function CheckNums(num1, num2) {
 
-    // If the numbers are equal, return -1. Otherwise, return Boolean for whether num2 is greater than num1.
-    return (num1 == num2) ? -1 : num2 > num1;
+    // code goes here  
+    return num1 == num2 ? "-1" : num2 > num1 ? " true" : "false";
+
 }
 
-console.log(CheckNums(5, 3));
+console.log(CheckNums(3, 3));
