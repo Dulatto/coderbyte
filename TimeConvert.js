@@ -5,11 +5,22 @@
 
 //Solution 1 
 
+// function TimeConvert(num) {
+
+//     var hours = Math.floor(num / 60);
+//     var minutes = num % 60;
+//     return hours + ":" + minutes;
+
+// }
+// console.log(TimeConvert(245))
+
+
+//Solution 2 
+
 function TimeConvert(num) {
 
-    var hours = Math.floor(num / 60);
-    var minutes = num % 60;
-    return hours + ":" + minutes;
+    // code goes here  
+    return Math.floor(num / 60) + ':' + (num % 60);
 
 }
 console.log(TimeConvert(245))
