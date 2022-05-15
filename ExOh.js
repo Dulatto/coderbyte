@@ -27,25 +27,47 @@
 
 // Solution
 
+// function ExOh(str) {
+
+//     if (str.length % 2 === 1) {
+//         return false;
+//     }
+//     else {
+//         var tot = 0;
+//         for (var i = 0; i < str.length; i++) {
+//             if (str[i] === "x") {
+//                 tot++;
+//             }
+//         }
+
+//         if (tot === (str.length / 2)) {
+//             return true;
+//         }
+//         else {
+//             return false;
+//         }
+//     }
+// }
+// console.log(ExOh('xooxxxxooxoo'))
+
+// Solution 2
+
 function ExOh(str) {
+    // Establish counters for 'x' and 'o'
+    let x = 0;
+    let o = 0;
 
-    if (str.length % 2 === 1) {
-        return false;
-    }
-    else {
-        var tot = 0;
-        for (var i = 0; i < str.length; i++) {
-            if (str[i] === "x") {
-                tot++;
-            }
-        }
+    // Loop through string
+    for (let i = 0; i < str.length; i++) {
 
-        if (tot === (str.length / 2)) {
-            return true;
-        }
-        else {
-            return false;
+        // Add 1 to respective counter each time an 'x' or 'o' is found
+        if (str[i] === 'x') {
+            x++;
+        } else {
+            o++;
         }
     }
+    // If the counters for 'x' and 'o' are the same, return true. Otherwise, return false.
+    return x === o;
 }
 console.log(ExOh('xooxxxxooxoo'))
