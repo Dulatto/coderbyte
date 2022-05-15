@@ -24,21 +24,45 @@
 ***************************************************************************************/
 
 // Solution 1
+// function VowelCount(str) {
+
+//     let vowelArr = ["a", "e", "i", "o", "u"];
+//     let tot = 0;
+
+//     str = str.toLowerCase();
+
+//     for (let i = 0; i < vowelArr.length; i++) {
+//         for (let j = 0; j < str.length; j++) {
+//             if (str[j] === vowelArr[i]) {
+//                 tot++;
+//             }
+//         }
+//     }
+//     return tot;
+// }
+
+// console.log(VowelCount('All cows eat grass'))
+
+//Solution 2
+
 function VowelCount(str) {
 
-    let vowelArr = ["a", "e", "i", "o", "u"];
-    let tot = 0;
-
+    // Make all letters lowercase for conditional check in loop
     str = str.toLowerCase();
 
-    for (let i = 0; i < vowelArr.length; i++) {
-        for (let j = 0; j < str.length; j++) {
-            if (str[j] === vowelArr[i]) {
-                tot++;
-            }
+    // Create counter storage
+    let counter = 0;
+
+    // Loop through string
+    for (let i = 0; i < str.length; i++) {
+
+        // If character is a vowel, add 1 to counter
+        if (str[i] === 'a' || str[i] === 'e' || str[i] === 'i' || str[i] === 'o' || str[i] === 'u') {
+            counter++;
         }
     }
-    return tot;
-}
 
+    // Counter represents total number of vowels in string
+    return counter;
+}
 console.log(VowelCount('All cows eat grass'))
