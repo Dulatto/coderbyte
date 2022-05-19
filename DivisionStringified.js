@@ -16,13 +16,22 @@
 *    2) Use RegExp to format string as required                                        *
 *                                                                                      *
 ***************************************************************************************/
+// function DivisionStringified(num1, num2) {
+
+//     var tot = Math.round(num1 / num2);
+//     var newNum = tot.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+
+//     return newNum;
+
+// }
+// console.log(DivisionStringified(123456789, 10000))
+// console.log(DivisionStringified(3, 7))
+
+//Solution 2
 function DivisionStringified(num1, num2) {
 
-    var tot = Math.round(num1 / num2);
-    var newNum = tot.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-
-    return newNum;
-
+    // Use native toLocaleString method to standardize numbers. No decimals included here.
+    return Number((num1 / num2).toFixed(0)).toLocaleString();
 }
 console.log(DivisionStringified(123456789, 10000))
 console.log(DivisionStringified(3, 7))
