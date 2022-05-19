@@ -29,39 +29,89 @@
 *    3) Else return false                                                              *
 *                                                                                      *
 ***************************************************************************************/
+// function CountingMinutesI(str) {
+//     var time1Obj = {}, time2Obj = {}, timeDiff;
+
+//     time1Obj = setTimeObject(str, 0);
+//     time2Obj = setTimeObject(str, 1);
+
+//     if (time1Obj.ampm == time2Obj.ampm && time1Obj.tot > time2Obj.tot) {
+//         timeDiff = (((12 - time1Obj.hours + 12) * 60) - (time1Obj.mins)) + ((time2Obj.hours * 60) + time2Obj.mins);
+//     }
+//     else if (time1Obj.ampm == time2Obj.ampm && time1Obj.tot < time2Obj.tot) {
+//         timeDiff = ((time2Obj.hours * 60) + time2Obj.mins) - ((time1Obj.hours * 60) + time1Obj.mins);
+//     }
+//     else if (time1Obj.ampm !== time2Obj.ampm && time1Obj.ampm === "am") {
+//         timeDiff = (((12 - time1Obj.hours) * 60) - time1Obj.mins) + ((time2Obj.hours * 60) + time2Obj.mins);
+//     }
+//     else {
+//         timeDiff = (((12 - time1Obj.hours) * 60) - time1Obj.mins) + ((time2Obj.hours * 60) + time2Obj.mins);
+//     }
+
+//     return timeDiff;
+// }
+
+// function setTimeObject(str, num) {
+//     var arr = str.split("-");
+//     var tObject = {};
+
+//     tObject.hours = Number(arr[num].slice(0, arr[num].length - 2).split(":")[0]);
+//     tObject.mins = Number(arr[num].slice(0, arr[num].length - 2).split(":")[1]);
+//     tObject.ampm = arr[num].slice(-2);
+//     tObject.tot = tObject.hours * 100 + tObject.mins;
+
+//     return tObject;
+// }
+
+// console.log(CountingMinutesI('9:00am-10:00am'))
+// console.log(CountingMinutesI('1:00pm-11:00am'))
+
+//Solution 2
+
 function CountingMinutesI(str) {
-    var time1Obj = {}, time2Obj = {}, timeDiff;
 
-    time1Obj = setTimeObject(str, 0);
-    time2Obj = setTimeObject(str, 1);
+    // Split into beginning and end times
+    let times = str.split('-');
+    let startTime = times[0];
+    let endTime = times[1];
 
-    if (time1Obj.ampm == time2Obj.ampm && time1Obj.tot > time2Obj.tot) {
-        timeDiff = (((12 - time1Obj.hours + 12) * 60) - (time1Obj.mins)) + ((time2Obj.hours * 60) + time2Obj.mins);
-    }
-    else if (time1Obj.ampm == time2Obj.ampm && time1Obj.tot < time2Obj.tot) {
-        timeDiff = ((time2Obj.hours * 60) + time2Obj.mins) - ((time1Obj.hours * 60) + time1Obj.mins);
-    }
-    else if (time1Obj.ampm !== time2Obj.ampm && time1Obj.ampm === "am") {
-        timeDiff = (((12 - time1Obj.hours) * 60) - time1Obj.mins) + ((time2Obj.hours * 60) + time2Obj.mins);
-    }
-    else {
-        timeDiff = (((12 - time1Obj.hours) * 60) - time1Obj.mins) + ((time2Obj.hours * 60) + time2Obj.mins);
+    // Create function that calculates minutes from midnight for each time
+    function minutesFromMidnight(time) {
+
+        // Split by colon to access hours and minutes
+        let split = time.split(':');
+        let hours = parseInt(split[0]);
+        let minutes = parseInt(split[1]);
+
+        // Calculate total minutes temporarily
+        let totalMinutes = hours * 60 + minutes;
+
+        // If midnight, subtract 720 minutes
+        if (time.includes('a') && hours === 12) {
+            totalMinutes -= 12 * 60;
+        }
+
+        // If pm but NOT noon, add 720 minutes
+        if (time.includes('p') && hours !== 12) {
+            totalMinutes += 12 * 60;
+        }
+
+        // Function returns total minutes with edge cases included
+        return totalMinutes;
     }
 
-    return timeDiff;
+    // Calculate minutes from midnight for each time
+    let startMinutesFromMidnight = minutesFromMidnight(startTime);
+    let endMinutesFromMidnight = minutesFromMidnight(endTime);
+
+    // If ends same day, return difference
+    if (endMinutesFromMidnight > startMinutesFromMidnight) {
+        return endMinutesFromMidnight - startMinutesFromMidnight;
+
+        // If ends next day, subtract difference from 1440 minutes (total minutes in a day)
+    } else {
+        return 1440 - (startMinutesFromMidnight - endMinutesFromMidnight);
+    }
 }
-
-function setTimeObject(str, num) {
-    var arr = str.split("-");
-    var tObject = {};
-
-    tObject.hours = Number(arr[num].slice(0, arr[num].length - 2).split(":")[0]);
-    tObject.mins = Number(arr[num].slice(0, arr[num].length - 2).split(":")[1]);
-    tObject.ampm = arr[num].slice(-2);
-    tObject.tot = tObject.hours * 100 + tObject.mins;
-
-    return tObject;
-}
-
 console.log(CountingMinutesI('9:00am-10:00am'))
 console.log(CountingMinutesI('1:00pm-11:00am'))
