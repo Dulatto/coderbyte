@@ -21,53 +21,84 @@
 *                                                                                      *
 ***************************************************************************************/
 
+// function MeanMode(arr) {
+
+//     var myMean, myMode;
+
+//     myMode = getMode(arr);
+//     myMean = getMean(arr);
+
+//     if (myMode == myMean) {
+//         return 1;
+//     } else {
+//         return 0;
+//     }
+
+// }
+
+// function getMean(arr) {
+//     var sum = 0, mean;
+
+//     for (var i = 0; i < arr.length; i++) {
+//         sum = sum + arr[i];
+//     }
+//     mean = sum / arr.length;
+
+//     return mean;
+// }
+
+
+// function getMode(arr) {
+//     var ctObj = {}, mode, maxCt = 1;
+
+//     arr.sort(function (a, b) { return a - b; });
+
+//     for (var i = 0; i < arr.length; i++) {
+//         ctObj[arr[i]] = ctObj[arr[i]] || 0;
+//         ctObj[arr[i]]++;
+//     }
+
+//     for (var key in ctObj) {
+//         if (ctObj.hasOwnProperty(key)) {
+//             if (ctObj[key] > maxCt) {
+//                 maxCt = ctObj[key];
+//                 mode = key;
+//             }
+//         }
+//     }
+
+//     return mode;
+// }
+
+// console.log(MeanMode([5, 3, 3, 3, 1]))
+// console.log(MeanMode([5, 3, 3, 3, 5]))
+
+// Solution 2
+
 function MeanMode(arr) {
 
-    var myMean, myMode;
+    // Sum all values, then divide by the total number of values to get the mean
+    let mean = arr.reduce(function (p, v) { return p + v; }) / arr.length;
 
-    myMode = getMode(arr);
-    myMean = getMean(arr);
+    // Create object with key-value pairs of digit: count
+    let table = arr.reduce(function (memo, n) {
+        n in memo ? memo[n]++ : memo[n] = 1;
+        return memo;
+    }, {});
 
-    if (myMode == myMean) {
-        return 1;
-    } else {
-        return 0;
-    }
+    // Track mode and number of times it appears in array
+    let answer = { mode: null, count: 0 };
 
-}
-
-function getMean(arr) {
-    var sum = 0, mean;
-
-    for (var i = 0; i < arr.length; i++) {
-        sum = sum + arr[i];
-    }
-    mean = sum / arr.length;
-
-    return mean;
-}
-
-
-function getMode(arr) {
-    var ctObj = {}, mode, maxCt = 1;
-
-    arr.sort(function (a, b) { return a - b; });
-
-    for (var i = 0; i < arr.length; i++) {
-        ctObj[arr[i]] = ctObj[arr[i]] || 0;
-        ctObj[arr[i]]++;
-    }
-
-    for (var key in ctObj) {
-        if (ctObj.hasOwnProperty(key)) {
-            if (ctObj[key] > maxCt) {
-                maxCt = ctObj[key];
-                mode = key;
-            }
+    // Loop through integers to determine which has highest count. Update mode and count if find new mode.
+    for (let n in table) {
+        if (table[n] > answer['count']) {
+            answer['mode'] = parseInt(n);
+            answer['count'] = table[n];
         }
     }
 
-    return mode;
+    // If mode equals mean, return 1. Otherwise, return 0.
+    return (answer['mode'] === mean) ? 1 : 0;
 }
 
 console.log(MeanMode([5, 3, 3, 3, 1]))
