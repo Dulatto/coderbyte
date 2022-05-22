@@ -17,20 +17,46 @@
 *                                                                                      *
 ***************************************************************************************/
 
+// function DashInsert(str) {
+
+//     var idx = 0;
+//     while (idx < str.length - 1) {
+//         if (Number(str[idx]) % 2 === 1 && Number(str[idx + 1]) % 2 === 1) {
+//             str = str.slice(0, idx + 1) + "-" + str.slice(idx + 1);
+//             idx = idx + 2;
+//         }
+//         else {
+//             idx++;
+//         }
+//     }
+//     return str;
+
+// }
+// console.log(DashInsert('454793'));
+// console.log(DashInsert('53976655'));
+
+// Solution 2
+
 function DashInsert(str) {
 
-    var idx = 0;
-    while (idx < str.length - 1) {
-        if (Number(str[idx]) % 2 === 1 && Number(str[idx + 1]) % 2 === 1) {
-            str = str.slice(0, idx + 1) + "-" + str.slice(idx + 1);
-            idx = idx + 2;
-        }
-        else {
-            idx++;
+    // Storage for pushing integers and dashes
+    let answer = [];
+
+    // Loop through array
+    for (let i = 0; i < str.length; i++) {
+
+        // Number will always be pushed as integer
+        answer.push(parseInt(str[i]));
+
+        // If odd integer followed by odd integer, push dash
+        if (parseInt(str[i]) % 2 === 1 && parseInt(str[i + 1]) % 2 === 1) {
+            answer.push('-');
         }
     }
-    return str;
 
+    // Odd pairs will have exactly one dash between them!
+    return answer.join('');
 }
+
 console.log(DashInsert('454793'));
 console.log(DashInsert('53976655'));
