@@ -22,18 +22,43 @@
 *                                                                                      *
 ***************************************************************************************/
 
+// function SwapCase(str) {
+
+//     var result = '';
+
+//     for (var i = 0; i < str.length; i++) {
+//         var c = str[i];
+//         var u = c.toUpperCase();
+
+//         result += u === c ? c.toLowerCase() : u;
+//     }
+
+//     return result;
+
+// }
+// console.log(SwapCase("Hello World"));
+
+// Solution 2
+
 function SwapCase(str) {
 
-    var result = '';
+    // Create array to modify in place
+    let chars = str.split("");
 
-    for (var i = 0; i < str.length; i++) {
-        var c = str[i];
-        var u = c.toUpperCase();
+    // Loop through array of characters
+    for (let i = 0; i < chars.length; i++) {
 
-        result += u === c ? c.toLowerCase() : u;
+        // If current value is uppercase, make lowercase
+        if (chars[i] === chars[i].toUpperCase()) {
+            chars[i] = chars[i].toLowerCase();
+
+            // If current value is lowercase, make uppercase
+        } else if (chars[i] === chars[i].toLowerCase()) {
+            chars[i] = chars[i].toUpperCase();
+        }
     }
 
-    return result;
-
+    // Non-alphabetic characters remain unaffected. Return as string.
+    return chars.join("");
 }
 console.log(SwapCase("Hello World"));
