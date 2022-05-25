@@ -19,24 +19,39 @@
 *    3) Test if last number is 2 meaning it is a power of 2                            *
 *                                                                                      *
 ***************************************************************************************/
+// function PowersofTwo(num) {
+
+//     var divis;
+//     var newNum;
+
+//     divis = num % 2;
+//     newNum = num / 2;
+//     while (divis === 0 && newNum !== 2) {
+//         divis = newNum % 2;
+//         newNum = newNum / 2;
+//     }
+
+//     if (newNum === 2) {
+//         return true;
+//     }
+//     else {
+//         return false;
+//     }
+// }
+// console.log(PowersofTwo(32));
+// console.log(PowersofTwo(22));
+
+// Solution 2
 function PowersofTwo(num) {
 
-    var divis;
-    var newNum;
-
-    divis = num % 2;
-    newNum = num / 2;
-    while (divis === 0 && newNum !== 2) {
-        divis = newNum % 2;
-        newNum = newNum / 2;
+    // Divide number by 2 until the number is smaller than 2.
+    while (num >= 2) {
+        num /= 2;
     }
 
-    if (newNum === 2) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    // If loop ends when num equals 1, then num is a power of two. Otherwise, two cannot multiply itself into num so we return false.
+    return num === 1;
 }
+
 console.log(PowersofTwo(32));
 console.log(PowersofTwo(22));
