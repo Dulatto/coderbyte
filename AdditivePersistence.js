@@ -22,21 +22,48 @@
 *    4) Return number of loops as answer                                               *
 *                                                                                      *
 ***************************************************************************************/
+// function AdditivePersistence(num) {
+
+//     var sum, loop = 0;
+//     var val1 = num.toString(10).split("").map(function (t) { return parseInt(t) });
+
+//     while (val1.length > 1) {
+//         sum = 0;
+//         val1.forEach(function (number) {
+//             sum = sum + number;
+//         });
+
+//         val1 = sum.toString(10).split("").map(function (t) { return parseInt(t) });
+//         loop++;
+//     }
+
+//     return loop;
+// }
+// console.log(AdditivePersistence(5567954))
+
+//Solution 2
 function AdditivePersistence(num) {
 
-    var sum, loop = 0;
-    var val1 = num.toString(10).split("").map(function (t) { return parseInt(t) });
-
-    while (val1.length > 1) {
-        sum = 0;
-        val1.forEach(function (number) {
-            sum = sum + number;
-        });
-
-        val1 = sum.toString(10).split("").map(function (t) { return parseInt(t) });
-        loop++;
+    // Convert number to array of digits
+    function numToArray(n) {
+        return n.toString(10).split("").map(function (val) { return parseInt(val) });
     }
 
-    return loop;
+    // Initialize integer array
+    let intArr = numToArray(num);
+
+    // Keep track of number of times digits are combined a.k.a. additive persistence
+    let count = 0;
+
+    // Repeatedly sum digits, create new integer array for each sum, and increase counter until last digit left
+    while (intArr.length > 1) {
+        let newDigits = intArr.reduce(function (p, v) { return p + v });
+        intArr = numToArray(newDigits);
+        count++;
+    }
+
+    // The counter represents additive persistence of a number!
+    return count;
 }
+
 console.log(AdditivePersistence(5567954))
