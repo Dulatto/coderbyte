@@ -29,20 +29,55 @@
 *                                                                                      *
 ***************************************************************************************/
 
+// function OffLineMinimum(strArr) {
+
+//     var subset = [], min = 0;
+//     function findMin(arr) { return arr.sort(function (a, b) { return Number(a) - Number(b); })[0]; }
+//     for (var i = 0; i < strArr.length; i++) {
+//         if (strArr[i] == "E") {
+//             min = findMin(strArr.slice(0, i));
+//             minIndex = strArr.slice(0, i).indexOf(min)
+//             subset.push(Number(min));
+//             strArr = strArr.slice(0, minIndex).concat(strArr.slice(minIndex + 1, i)).concat(strArr.slice(i + 1));
+//             i -= 2;
+//         }
+//     }
+//     return subset.join(",");
+
+// }
+// console.log(OffLineMinimum(["5", "8", "6", "E", "6", "7", "E", "E", "9", "2"]));
+
+// Solution 2
 function OffLineMinimum(strArr) {
 
-    var subset = [], min = 0;
-    function findMin(arr) { return arr.sort(function (a, b) { return Number(a) - Number(b); })[0]; }
-    for (var i = 0; i < strArr.length; i++) {
-        if (strArr[i] == "E") {
-            min = findMin(strArr.slice(0, i));
-            minIndex = strArr.slice(0, i).indexOf(min)
-            subset.push(Number(min));
-            strArr = strArr.slice(0, minIndex).concat(strArr.slice(minIndex + 1, i)).concat(strArr.slice(i + 1));
-            i -= 2;
+    // Test for integers
+    function isNumeric(n) {
+        return !isNaN(parseInt(n)) && isFinite(n);
+    }
+
+    // Need one array for holding integers during loop and another for storing smallest integers at each 'E'
+    let integers = [];
+    let answer = [];
+
+    // Loop through array of characters
+    for (let i = 0; i < strArr.length; i++) {
+        let char = strArr[i];
+
+        // If character is a number, push to integer array and 
+        // sort so that integers are always in ascending order
+        if (isNumeric(char)) {
+            integers.push(parseInt(char));
+            integers.sort(function (a, b) { return a - b });
+        }
+
+        // If character is 'E', push smallest number to answer array and remove from integer array
+        if (char === 'E') {
+            answer.push(integers.shift());
         }
     }
-    return subset.join(",");
 
+    // Format
+    return answer.join(',');
 }
+
 console.log(OffLineMinimum(["5", "8", "6", "E", "6", "7", "E", "E", "9", "2"]));
